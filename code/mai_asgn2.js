@@ -16,7 +16,8 @@ var crosshair = false;
 var Degrees = [0, 0, 0, 0, 0, 0, 0, 0]; //rotation degrees for the speed
 var w_h_ratio = 1; 
 var xprime = 0;
-var zprime = 0; 
+var zprime = 0;
+var fov = 90; 
 //matrices
 var ortho_Matrix;
 var proj_matrix;
@@ -57,19 +58,20 @@ window.onload = function init() {
 			z = -40;
 			w_h_ratio = 1;//ratio between width and height of canvas
 			degrees_camera = 0;
+			fov=90;
 		}
 		// if "+" key pressed either by shift = , should toggle the display of an orthographic projection of a cross hair centered over your scene. The cross hairs themselves can be a simple set of lines rendered in white
 		else if (e.shiftKey && e.keyCode == 187)
 			crosshair = !crosshair; // setting it on/off when pressed on it
 		//The ‘c’ key should cycle the colors between the cubes
 		else if(e.keyCode===67) 
-			my_array(cColors); // the following function is used to cycle the colors among the cubes given the array of colors
+			cycling(cColors); // the following function is used to cycle the colors among the cubes given the array of colors
 		//The ‘n' key should adjust the horizontal field of view (FOV) narrower. One (1) degree per key press (w_h_ratio is width/height thus keeping aspect of my scene squared)
-		else if(e.keyCode===78)
-			w_h_ratio+=1;
+		else if(e.keyCode==78)
+			fov+=1;
 		//The‘w’ keys should adjust the horizontal field of view (FOV) wider. One (1) degree per key press (w_h_ratio is width/height thus keeping aspect of my scene squared)
-		else if(e.keyCode===87) 
-			w_h_ratio-=1;
+		else if(e.keyCode==87) 
+			fov-=1;
 		//The letter i control forward relative to the camera's current heading. Each key press should adjust position by 0.25 units.
 		else if(e.keyCode===73)
 		{ 
@@ -109,6 +111,7 @@ window.onload = function init() {
 	gl.clearColor(0.0, 0.0, 0.0, 1.0); // set canvas background to black when cleared
 	//enable the z-buffer to ensure that the depth factor is enables and how thing are viewed correctly if they appear closer on the z axis
 	gl.enable(gl.DEPTH_TEST); 
+	//gl.depthFunc(gl.LEQUAL);
 	
 	//setting the vertices of one unit cube that will be later moved to different positions
 	var length = 0.5; //the sides of the unit cube are 1 thus the lenght should be 0.5 thus the total length is 1 
@@ -160,8 +163,9 @@ window.onload = function init() {
 
 function render() {
 
+	//gl.enable(gl.DEPTH_TEST); 
 	// set proj_matrix to be prespective by default
-	proj_matrix = perspective(90, w_h_ratio, -1, 1); 
+	proj_matrix = perspective(fov, w_h_ratio, -1, 1); 
 	//set orthoProjectionMatrix in case choosing to have orthogonal view instead of prespective
 	ortho_Matrix = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	// seting uniform tranformation_matrix matrix
@@ -170,6 +174,7 @@ function render() {
 	color = gl.getUniformLocation(program, "color");
 	//clearing the color and the depth of the canvas
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+	
 	// setting a new 4x4 matrix that will be used to transform the cubes/the world through multiplying it with other matrices and scales
 	var my_array = mat4();
 	//setting the rotation degrees for the 8 cubes
