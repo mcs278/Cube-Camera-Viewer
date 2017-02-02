@@ -165,7 +165,7 @@ function render() {
 
 	//gl.enable(gl.DEPTH_TEST); 
 	// set proj_matrix to be prespective by default
-	proj_matrix = perspective(fov, w_h_ratio, -1, 1); 
+	proj_matrix = perspective(fov, w_h_ratio, 1, -1); 
 	//set orthoProjectionMatrix in case choosing to have orthogonal view instead of prespective
 	ortho_Matrix = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	// seting uniform tranformation_matrix matrix
