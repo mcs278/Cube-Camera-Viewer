@@ -1,7 +1,7 @@
 Name: Mai Saleh
 UID: 904-863-797
 
-grade version v4.0
+grade version v5.0
 
 CS174A 
 Lab 1 due 02/01/2017
@@ -9,9 +9,11 @@ Professor Scott
 TA: Garrett
 
 Notes about operation:
-	0) use internet explorer
-	1)once you open the .html file just left click with the mouse on the screen to let the keyboard operations start
-	2)the + key that is used is SHIFT and the = key, I donot have the + key by itself on my keyborad thus that it what I used so that I can check that is working 
+	----->> (0) use internet explorer
+
+	----->> (1)once you open the .html file just left click with the mouse on the screen to let the keyboard operations start
+
+	----->> (2)the + key that is used is SHIFT and the = key, I donot have the + key by itself on my keyborad thus that it what I used so that I can check that is working 
 	
 
 

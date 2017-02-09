@@ -68,10 +68,10 @@ window.onload = function init() {
 			cycling(cColors); // the following function is used to cycle the colors among the cubes given the array of colors
 		//The ‘n' key should adjust the horizontal field of view (FOV) narrower. One (1) degree per key press (w_h_ratio is width/height thus keeping aspect of my scene squared)
 		else if(e.keyCode==78)
-			fov+=1;
+			fov-=1;
 		//The‘w’ keys should adjust the horizontal field of view (FOV) wider. One (1) degree per key press (w_h_ratio is width/height thus keeping aspect of my scene squared)
 		else if(e.keyCode==87) 
-			fov-=1;
+			fov+=1;
 		//The letter i control forward relative to the camera's current heading. Each key press should adjust position by 0.25 units.
 		else if(e.keyCode===73)
 		{ 
@@ -83,7 +83,7 @@ window.onload = function init() {
 		//The letter j control left relative to the camera's current heading. Each key press should adjust position by 0.25 units.
 		else if(e.keyCode===74)
 		{ 
-			camera_ijkm(degrees_camera, 2, 0.25);
+			camera_ijkm(degrees_camera, 3, 0.25);
 			x-=xprime;
 			z-=zprime;
 			// or can simply use x+=0.25; instead of the previous 3 lines 
@@ -91,7 +91,7 @@ window.onload = function init() {
 		//The letter k control right, relative to the camera's current heading. Each key press should adjust position by 0.25 units.
 		else if(e.keyCode===75) 
 		{ 
-			camera_ijkm(degrees_camera, 3, 0.25);
+			camera_ijkm(degrees_camera, 2, 0.25);
 			x-=xprime;
 			z-=zprime;
 			// or can simply use x-=0.25; instead of the previous 3 lines 
@@ -165,7 +165,7 @@ function render() {
 
 	//gl.enable(gl.DEPTH_TEST); 
 	// set proj_matrix to be prespective by default
-	proj_matrix = perspective(fov, w_h_ratio, 1, -1); 
+	proj_matrix = perspective(fov, w_h_ratio, 1, 100); // not -1 and 1 it got to be positive numbers
 	//set orthoProjectionMatrix in case choosing to have orthogonal view instead of prespective
 	ortho_Matrix = ortho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 	// seting uniform tranformation_matrix matrix
