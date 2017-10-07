@@ -1,4 +1,3 @@
-Name: Mai Saleh
 
 Notes about operation:
 	----->> (0) use internet explorer
